@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('starred_files', function (Blueprint $table) {
             $table->id();
+            $table->foreignId(column: 'file_id')->constrained(table: 'files');
+            $table->foreignId(column: 'user_id')->constrained(table: 'users');
             $table->timestamps();
         });
     }
