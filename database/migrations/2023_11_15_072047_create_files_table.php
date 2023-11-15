@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
+            $table->string(column: 'name', length: 1024);
+            $table->string(column: 'path', length: 1024)->nullable();
+            $table->nestedSet();
+            $table->boolean(column: 'is_folder');
+            $table->string(column: 'mime')->nullable();
+            $table->integer(column: 'size')->nullable();
             $table->timestamps();
+            $table->foreignIdFor(model: \app\Models\User::class, column: 'created_by');
+            $table->foreignIdFor(model: \app\Models\User::class, column: 'updated_by');
+            $table->softDeletes();
         });
     }
 
